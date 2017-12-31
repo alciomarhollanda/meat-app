@@ -1,13 +1,21 @@
 import {Injectable} from '@angular/core'
+
+import {Http, Headers, RequestOptions} from '@angular/http'
+import {Observable} from 'rxjs/Observable'
+import 'rxjs/add/operator/map'
+
 import {ShoppingCartService} from '../restaurant-detail/shopping-cart/shopping-cart.service'
 import { CartItem } from '../restaurant-detail/shopping-cart/cart-item.model';
+import {Order, OrderItem} from './order.model'
+import { MEAT_API } from 'app/app.api';
 
 @Injectable()
 export class OrderService {
-    constructor(private cartService: ShoppingCartService) {        
+    constructor(private cartService: ShoppingCartService, private http: Http) {
     }
 
-    carItems():CartItem[]{
+  
+   carItems():CartItem[]{
         return this.cartService.items
     }
 
@@ -25,5 +33,19 @@ export class OrderService {
 
     itemValue():number{
         return this.cartService.total()
+    }
+
+    checkOrder(order: Order): Observable<string>{
+        const headers  = new Headers()
+        headers.append('Content-Type', 'application/json')
+        
+        return this.http.post(MEAT_API+"/orders",
+            JSON.stringify(order),
+            new RequestOptions({headers:headers}))
+        .map(reponse => reponse.json())
+    }
+
+    clear(){
+        this.cartService.clear()
     }
 }
