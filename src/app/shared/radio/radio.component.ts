@@ -15,6 +15,7 @@ import {RadioOption} from './radio-option.model'
   ]
 })
 export class RadioComponent implements OnInit, ControlValueAccessor {
+
   onChange: any;
  
   @Input() options: RadioOption[]
@@ -38,12 +39,14 @@ export class RadioComponent implements OnInit, ControlValueAccessor {
   registerOnChange(fn: any): void {
     this.onChange = fn
   }
+  
   registerOnTouched(fn: any): void {
-    throw new Error("Method not implemented.");
+    console.log("Method not implemented. registerOnTouched ");
   }
   setDisabledState?(isDisabled: boolean): void {
-    throw new Error("Method not implemented.");
-  }
+    console.log("Method not implemented. setDisabledState ");
+  } 
+  
 
 
 }
