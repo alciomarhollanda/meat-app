@@ -16,7 +16,7 @@ export class ShoppingCartService {
 
 
     clear() {
-        this.items = []
+        this.items = [];
     }
 
     addItem(item: MenuItem) {
@@ -26,13 +26,13 @@ export class ShoppingCartService {
         } else {
             this.items.push(new CartItem(item));
         }
-        this.notificationService.notify("Você adicionou o item " + item.name);
+        this.notificationService.notify('Você adicionou o item ' + item.name);
     }
 
     removeItem(item: CartItem) {
         this.items.splice(this.items.indexOf(item), 1);
 
-        this.notificationService.notify("Você removeu o item " + item.menuItem.name);
+        this.notificationService.notify('Você removeu o item ' + item.menuItem.name);
     }
 
     total(): number {
