@@ -442,6 +442,26 @@
         }
       ],
       "id": 5
+    },
+    {
+      "name": "Alciomar Lindo",
+      "email": "alciomarhollanda@gmail.com",
+      "emailConfirmation": "alciomarhollanda@gmail.com",
+      "address": "Av Francisco Rondelli",
+      "number": "47",
+      "optionalAddress": "Fabrica de Bloco",
+      "paymentOption": "MON",
+      "orderItems": [
+        {
+          "quantity": 1,
+          "menuId": "cup-cake"
+        },
+        {
+          "quantity": 1,
+          "menuId": "donut"
+        }
+      ],
+      "id": 6
     }
   ]
 }
