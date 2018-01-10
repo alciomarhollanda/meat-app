@@ -3,7 +3,8 @@ import { Express } from 'express';
 
 import * as fs from 'fs';
 import * as https from 'https';
-import { handleAuthentication } from './auth'
+import { handleAuthentication } from './auth';
+import { handleAuthorization } from './authz';
 
 const server = jsonServer.create()
 const router = jsonServer.router('db.json')
@@ -19,16 +20,17 @@ server.use(jsonServer.bodyParser)
 
 // middlewares para login :D
 server.post('/login', handleAuthentication)
+server.use('/orders', handleAuthorization)
 
 server.use(router)
 
 const options = {
-  cert: fs.readFileSync('../keys/cert.pem'),
-  key: fs.readFileSync('../keys/key.pem')
+  cert: fs.readFileSync('./backend/keys/cert.pem'),
+  key: fs.readFileSync('./backend/keys/key.pem')
 }
 
 const port = 3001;
 
 https.createServer(options, server).listen(port, () => {
-  console.log('JSON Server is running on  https://localhost:' + port)
+  console.log(`JSON Server is running on  https://localhost:${port}`)
 })

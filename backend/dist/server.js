@@ -4,6 +4,7 @@ var jsonServer = require("json-server");
 var fs = require("fs");
 var https = require("https");
 var auth_1 = require("./auth");
+var authz_1 = require("./authz");
 var server = jsonServer.create();
 var router = jsonServer.router('db.json');
 var middlewares = jsonServer.defaults();
@@ -15,12 +16,13 @@ server.use(jsonServer.bodyParser);
 // Use default router
 // middlewares para login :D
 server.post('/login', auth_1.handleAuthentication);
+server.use('/orders', authz_1.handleAuthorization);
 server.use(router);
 var options = {
-    cert: fs.readFileSync('../keys/cert.pem'),
-    key: fs.readFileSync('../keys/key.pem')
+    cert: fs.readFileSync('./backend/keys/cert.pem'),
+    key: fs.readFileSync('./backend/keys/key.pem')
 };
 var port = 3001;
 https.createServer(options, server).listen(port, function () {
-    console.log('JSON Server is running on  https://localhost:' + port);
+    console.log("JSON Server is running on  https://localhost:" + port);
 });
