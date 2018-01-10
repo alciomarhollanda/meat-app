@@ -6,10 +6,12 @@ import { MenuComponent } from 'app/restaurant-detail/menu/menu.component';
 import { ReviewsComponent } from 'app/restaurant-detail/reviews/reviews.component';
 import { OrderSummaryComponent } from 'app/order-summary/order-summary.component';
 import { NotFoundComponent } from 'app/not-found/not-found.component';
+import { LoginComponent } from 'app/security/login/login.component';
 
 
 export const ROUTES: Routes = [
     { path: '', component: HomeComponent },
+    { path: 'login', component: LoginComponent },
     { path: 'restaurants', component: RestaurantsComponent },
     {
         path: 'restaurants/:id', component: RestaurantDetailComponent,
