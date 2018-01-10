@@ -11,6 +11,7 @@ import { ShoppingCartService } from '../restaurant-detail/shopping-cart/shopping
 import { RestaurantsService } from '../restaurants/restaurants.service';
 import { SnackbarComponent } from '../shared/messages/snackbar/snackbar.component';
 import { NotificationService } from './messages/notification.service';
+import { LoginService } from 'app/security/login/login.service';
 
 
 
@@ -22,16 +23,18 @@ import { NotificationService } from './messages/notification.service';
     exports: [InputComponent, RadioComponent
         , RatingComponent, CommonModule
         , FormsModule, ReactiveFormsModule
-        , SnackbarComponent  ]
+        , SnackbarComponent]
 })
 export class SharedModule {
 
     static forRoot(): ModuleWithProviders {
         return {
             ngModule: SharedModule,
-            providers: [OrderService, ShoppingCartService, RestaurantsService,NotificationService]
+            providers: [OrderService
+                , ShoppingCartService
+                , RestaurantsService
+                , NotificationService
+                , LoginService]
         };
     }
-
-
 }
