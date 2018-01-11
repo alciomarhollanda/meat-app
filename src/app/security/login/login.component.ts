@@ -28,17 +28,17 @@ export class LoginComponent implements OnInit {
       password: this.fb.control('', [Validators.required])
     });
 
-    this.navigateTo = this.activatedRoute.snapshot.params['to'] || '/';
+    this.navigateTo = this.activatedRoute.snapshot.params['to'] || btoa('/');
     console.log(`ngOnInit(): ${this.navigateTo}`)
   }
 
   login() {
     this.loginService.login(this.loginForm.value.email, this.loginForm.value.password)
       .subscribe(user => this.notificationService.notify(`Bem vindo, ${user.name}!`),
-                response => this.notificationService.notify(response.error.message),
-                () => {
-                  this.router.navigate([this.navigateTo]);
-                })
+      response => this.notificationService.notify(response.error.message),
+      () => {
+        this.router.navigate([atob(this.navigateTo)]);
+      })
 
 
 

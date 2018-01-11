@@ -1,24 +1,31 @@
-import { CanLoad, Route } from '@angular/router'
+import { CanLoad, Route, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router'
 import { Observable } from 'rxjs/Observable';
 import { Injectable } from '@angular/core';
 import { LoginService } from 'app/security/login/login.service';
 
 @Injectable()
-export class LoggedinInGuard implements CanLoad {
+export class LoggedinInGuard implements CanLoad, CanActivate {
 
     /**
      *Alciomar é muito Lindo
      */
     constructor(private loginService: LoginService) {
     }
-
-    canLoad(route: Route): boolean {
+    checkAuthentication(path: string): boolean {
         const loggedIn = this.loginService.isLoggedIn()
 
         if (!loggedIn) {
-            console.log(route);
-            this.loginService.handleLogin(`/${route.path}`);
+            this.loginService.handleLogin(`/${path}`);
         }
         return loggedIn;
+    }
+
+    canLoad(route: Route): boolean {
+        console.log('canLoad')
+        return this.checkAuthentication(route.path);
+    }
+    canActivate(activateRouter: ActivatedRouteSnapshot, routerState: RouterStateSnapshot): boolean {
+        console.log('canActivate')
+        return this.checkAuthentication(activateRouter.routeConfig.path)
     }
 }

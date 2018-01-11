@@ -21,7 +21,7 @@ export class OrderComponent implements OnInit {
 
   orderForm: any = FormGroup
 
-  delivery: number = 8
+  delivery = 8
 
 
   paymentOptions: RadioOption[] = [
@@ -48,6 +48,7 @@ export class OrderComponent implements OnInit {
     }, { validator: OrderComponent.equalsTo })
   }
 
+  // tslint:disable-next-line:member-ordering
   static equalsTo(group: AbstractControl): { [key: string]: boolean } {
     const email = group.get('email')
     const emailConfirmation = group.get('emailConfirmation')
@@ -88,7 +89,7 @@ export class OrderComponent implements OnInit {
     this.orderService.checkOrder(order)
       .subscribe((orderId: string) => {
         this.router.navigate(['/order-summary'])
-        console.log("Compra concluída: " + orderId)
+        console.log('Compra concluída: ' + orderId)
         this.orderService.clear()
       })
   }
