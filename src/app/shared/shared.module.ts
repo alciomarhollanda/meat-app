@@ -12,6 +12,7 @@ import { RestaurantsService } from '../restaurants/restaurants.service';
 import { SnackbarComponent } from '../shared/messages/snackbar/snackbar.component';
 import { NotificationService } from './messages/notification.service';
 import { LoginService } from 'app/security/login/login.service';
+import { LoggedinInGuard } from '../security/loggedin.guard'
 
 
 
@@ -34,7 +35,8 @@ export class SharedModule {
                 , ShoppingCartService
                 , RestaurantsService
                 , NotificationService
-                , LoginService]
+                , LoginService
+                , LoggedinInGuard]
         };
     }
 }
