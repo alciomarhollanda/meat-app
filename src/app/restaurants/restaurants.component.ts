@@ -39,7 +39,7 @@ export class RestaurantsComponent implements OnInit {
   searchForm: FormGroup;
   searchControl: FormControl;
 
-  constructor(private RestaurantsService: RestaurantsService, private fb: FormBuilder) { }
+  constructor(private restaurantsService: RestaurantsService, private fb: FormBuilder) { }
 
   ngOnInit() {
     this.searchControl = this.fb.control('');
@@ -51,11 +51,11 @@ export class RestaurantsComponent implements OnInit {
       .debounceTime(500)
       .do(searchTerm => console.log('q=${' + searchTerm + '}'))
       .switchMap(searchTerm =>
-        this.RestaurantsService.restaurants(searchTerm))
+        this.restaurantsService.restaurants(searchTerm))
       .catch(error => Observable.from([]))
       .subscribe(restaurants => this.restaurants = restaurants);
 
-    this.RestaurantsService.restaurants()
+    this.restaurantsService.restaurants()
       .subscribe(restaurants => this.restaurants = restaurants);
   }
 

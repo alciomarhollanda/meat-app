@@ -12,11 +12,11 @@ export class ReviewsComponent implements OnInit {
   reviews: Observable<any>
 
   constructor(private restaurantsService: RestaurantsService
-            , private route:ActivatedRoute) { }
+    , private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.reviews = this.restaurantsService
-        .reviewsOfRestaurants(this.route.parent.snapshot.params['id'])
+      .reviewsOfRestaurants(this.route.parent.snapshot.params['id'])
   }
 
 }
