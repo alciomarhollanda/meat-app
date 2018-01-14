@@ -13,6 +13,7 @@ import { SnackbarComponent } from '../shared/messages/snackbar/snackbar.componen
 import { NotificationService } from './messages/notification.service';
 import { LoginService } from 'app/security/login/login.service';
 import { LoggedinInGuard } from '../security/loggedin.guard'
+import { LeaveOrderGuard } from '../order/leave-order.guard';
 
 
 
@@ -36,7 +37,8 @@ export class SharedModule {
                 , RestaurantsService
                 , NotificationService
                 , LoginService
-                , LoggedinInGuard]
+                , LoggedinInGuard
+                , LeaveOrderGuard]
         };
     }
 }

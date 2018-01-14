@@ -8,6 +8,7 @@ import { OrderService } from './order.service'
 import { CartItem } from '../restaurant-detail/shopping-cart/cart-item.model';
 import { Order, OrderItem } from './order.model'
 
+import 'rxjs/add/operator/do';
 
 
 @Component({
@@ -19,10 +20,11 @@ export class OrderComponent implements OnInit {
   emailPattern = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
   numberPattern = /^[0-9]*$/
 
-  orderForm: any = FormGroup
+  orderForm: any = FormGroup;
 
-  delivery = 8
+  delivery = 8;
 
+  orderId: string;
 
   paymentOptions: RadioOption[] = [
     { label: 'Dinheiro', value: 'MON' },
@@ -81,6 +83,10 @@ export class OrderComponent implements OnInit {
     this.orderService.remove(item)
   }
 
+  isOrderCompleted(): boolean {
+    return this.orderId !== undefined;
+  }
+
   checkOrder(order: Order) {
 
     order.orderItems = this.carItems()
@@ -93,4 +99,5 @@ export class OrderComponent implements OnInit {
         this.orderService.clear()
       })
   }
+
 }
