@@ -6,11 +6,11 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 })
 export class RatingComponent implements OnInit {
 
-  @Output() rated  = new EventEmitter<number>()
+  @Output() rated = new EventEmitter<number>()
 
-  rates:number[] = [1,2,3,4,5]
+  rates: number[] = [1, 2, 3, 4, 5]
 
-  rate:number = 0
+  rate = 0
 
   previousRate: number
 
@@ -20,24 +20,24 @@ export class RatingComponent implements OnInit {
   }
 
 
-  setRate(r:number){
+  setRate(r: number) {
     this.rate = r
     this.previousRate = undefined
 
     this.rated.emit(r)
   }
-  
-  setTemporaryRate(r: number){
-    if(this.previousRate === undefined){
+
+  setTemporaryRate(r: number) {
+    if (this.previousRate === undefined) {
       this.previousRate = this.rate
     }
     this.rate = r
   }
 
-  clearTemporaryRate(){
-    if(this.previousRate !== undefined){
+  clearTemporaryRate() {
+    if (this.previousRate !== undefined) {
       this.rate = this.previousRate
       this.previousRate = undefined
-    }    
+    }
   }
 }
